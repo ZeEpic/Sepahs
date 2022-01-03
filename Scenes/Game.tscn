@@ -1,0 +1,338 @@
+[gd_scene load_steps=24 format=2]
+
+[ext_resource path="res://Scripts/Game.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/Camera.gd" type="Script" id=2]
+[ext_resource path="res://Images/Sides.svg" type="Texture" id=3]
+[ext_resource path="res://Scenes/Tile.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Pieces/Circle.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Godot Resources/Nunito.tres" type="DynamicFont" id=6]
+[ext_resource path="res://Scenes/Grass.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Images/Close Button Dark.svg" type="Texture" id=8]
+[ext_resource path="res://Images/Close Button.svg" type="Texture" id=9]
+[ext_resource path="res://Scenes/Pieces/Square.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Images/Top Color Bar.svg" type="Texture" id=11]
+[ext_resource path="res://Images/Light.png" type="Texture" id=12]
+[ext_resource path="res://Images/Tile.svg" type="Texture" id=13]
+[ext_resource path="res://Images/Star 1.png" type="Texture" id=14]
+[ext_resource path="res://Godot Resources/NunitoSmall.tres" type="DynamicFont" id=15]
+[ext_resource path="res://Images/LineEditBG.svg" type="Texture" id=16]
+[ext_resource path="res://Images/TheMessageToggleButton.svg" type="Texture" id=17]
+[ext_resource path="res://Images/Reset Button.svg" type="Texture" id=18]
+[ext_resource path="res://Images/Rain.png" type="Texture" id=19]
+
+[sub_resource type="ParticlesMaterial" id=1]
+trail_divisor = 3
+emission_shape = 2
+emission_box_extents = Vector3( 350, 350, 1 )
+flag_disable_z = true
+gravity = Vector3( 2, 2, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 45.0
+angle_random = 0.86
+scale = 0.01
+scale_random = 0.02
+color = Color( 1, 1, 1, 0.0980392 )
+
+[sub_resource type="ParticlesMaterial" id=2]
+lifetime_randomness = 0.22
+emission_shape = 2
+emission_box_extents = Vector3( 1200, 1, 1 )
+flag_disable_z = true
+gravity = Vector3( -30, 98, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = -15.0
+scale = 0.1
+scale_random = 0.2
+color = Color( 0.133333, 0.615686, 0.827451, 0.392157 )
+hue_variation = 0.01
+
+[sub_resource type="StyleBoxTexture" id=3]
+content_margin_left = 8.0
+texture = ExtResource( 16 )
+region_rect = Rect2( 0, 0, 240, 40 )
+
+[sub_resource type="Theme" id=4]
+LineEdit/colors/clear_button_color = Color( 0, 0, 0, 1 )
+LineEdit/colors/clear_button_color_pressed = Color( 0, 0, 0, 1 )
+LineEdit/colors/cursor_color = Color( 0.270588, 0.172549, 0.188235, 1 )
+LineEdit/colors/font_color = Color( 0, 0, 0, 1 )
+LineEdit/colors/font_color_selected = Color( 0, 0, 0, 1 )
+LineEdit/colors/font_color_uneditable = Color( 0.88, 0.88, 0.88, 0.5 )
+LineEdit/colors/selection_color = Color( 1, 1, 1, 1 )
+LineEdit/constants/minimum_spaces = 12
+LineEdit/fonts/font = null
+LineEdit/icons/clear = null
+LineEdit/styles/focus = null
+LineEdit/styles/normal = SubResource( 3 )
+LineEdit/styles/read_only = null
+
+[node name="Game" type="Node2D"]
+script = ExtResource( 1 )
+tile = ExtResource( 4 )
+grass = ExtResource( 7 )
+
+[node name="BG" type="Sprite" parent="."]
+modulate = Color( 1, 0.866667, 0.8, 1 )
+show_behind_parent = true
+position = Vector2( -5.03967, 15.5517 )
+scale = Vector2( 28.9796, 21.2877 )
+texture = ExtResource( 13 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Grasses" type="Node2D" parent="."]
+
+[node name="Sides" type="Sprite" parent="."]
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Board" type="Node2D" parent="."]
+
+[node name="Dust" type="Particles2D" parent="."]
+process_material = SubResource( 1 )
+texture = ExtResource( 14 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Pieces" type="Node2D" parent="."]
+
+[node name="Circle" parent="Pieces" instance=ExtResource( 5 )]
+position = Vector2( 144.837, 40.2601 )
+color = Color( 0.65098, 0.917647, 0.92549, 1 )
+opponents = true
+
+[node name="Circle2" parent="Pieces" instance=ExtResource( 5 )]
+position = Vector2( 140.484, 146.842 )
+color = Color( 0.611765, 0.580392, 0.886275, 1 )
+
+[node name="Circle3" parent="Pieces" instance=ExtResource( 5 )]
+position = Vector2( -79.0571, 151.838 )
+color = Color( 0.611765, 0.580392, 0.886275, 1 )
+
+[node name="Circle4" parent="Pieces" instance=ExtResource( 5 )]
+position = Vector2( 40.403, 41.8095 )
+color = Color( 0.768627, 0.913725, 0.639216, 1 )
+opponents = true
+
+[node name="Square" parent="Pieces" instance=ExtResource( 10 )]
+position = Vector2( 40.6522, 149.186 )
+color = Color( 0.65098, 0.917647, 0.92549, 1 )
+
+[node name="Square3" parent="Pieces" instance=ExtResource( 10 )]
+position = Vector2( -70.7106, 52.4444 )
+color = Color( 0.611765, 0.580392, 0.886275, 1 )
+opponents = true
+
+[node name="Square2" parent="Pieces" instance=ExtResource( 10 )]
+position = Vector2( 255.021, 162.65 )
+color = Color( 0.768627, 0.913725, 0.639216, 1 )
+opponents = true
+
+[node name="Square5" parent="Pieces" instance=ExtResource( 10 )]
+position = Vector2( 252.903, 50.3466 )
+color = Color( 0.768627, 0.913725, 0.639216, 1 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+zoom = Vector2( 1.5, 1.5 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Rain" type="Particles2D" parent="Camera2D"]
+position = Vector2( 161.391, -906.161 )
+amount = 1000
+lifetime = 7.0
+speed_scale = 3.0
+randomness = 0.11
+visibility_rect = Rect2( -500, -500, 500, 500 )
+process_material = SubResource( 2 )
+texture = ExtResource( 19 )
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="UI"]
+margin_left = 6.0
+margin_right = 245.0
+margin_bottom = 91.0
+custom_fonts/font = ExtResource( 6 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Turn | 0
+Your Turn"
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Close Button" type="TextureButton" parent="UI"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -46.0
+margin_top = 4.0
+margin_bottom = 39.0
+texture_normal = ExtResource( 9 )
+texture_pressed = ExtResource( 8 )
+texture_hover = ExtResource( 8 )
+texture_disabled = ExtResource( 9 )
+texture_focused = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="UI"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+margin_left = 200.0
+margin_top = 20.2698
+margin_right = -200.0
+margin_bottom = 66.2698
+texture = ExtResource( 11 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="UI"]
+
+[node name="Messages" type="Control" parent="UI"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -509.0
+margin_right = 238.0
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="MessageLog" type="Label" parent="UI/Messages"]
+anchor_bottom = 1.0
+margin_right = 240.0
+margin_bottom = -74.0
+grow_vertical = 0
+custom_fonts/font = ExtResource( 15 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+valign = 2
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LineEdit" type="LineEdit" parent="UI/Messages"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 7.0
+margin_top = -53.0
+margin_right = 237.0
+margin_bottom = -2.0
+theme = SubResource( 4 )
+custom_fonts/font = ExtResource( 15 )
+clear_button_enabled = true
+caret_blink = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureButton" type="TextureButton" parent="UI/Messages"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 241.0
+margin_top = -53.0
+margin_right = 349.0
+margin_bottom = -2.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+toggle_mode = true
+texture_normal = ExtResource( 17 )
+texture_pressed = ExtResource( 17 )
+texture_hover = ExtResource( 17 )
+texture_disabled = ExtResource( 17 )
+texture_focused = ExtResource( 17 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ResetButton" type="TextureButton" parent="UI"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -220.0
+margin_top = -110.0
+texture_normal = ExtResource( 18 )
+texture_pressed = ExtResource( 18 )
+texture_hover = ExtResource( 18 )
+texture_focused = ExtResource( 18 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UI/ResetButton"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -120.0
+margin_bottom = -10.0
+custom_fonts/font = ExtResource( 6 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Reset"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CopyMovesButton" type="TextureButton" parent="UI"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -109.0
+margin_top = -110.0
+texture_normal = ExtResource( 18 )
+texture_pressed = ExtResource( 18 )
+texture_hover = ExtResource( 18 )
+texture_focused = ExtResource( 18 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UI/CopyMovesButton"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -9.0
+margin_bottom = -10.0
+custom_fonts/font = ExtResource( 6 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Copy
+Moves"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Light" type="Light2D" parent="."]
+position = Vector2( -520, -612 )
+texture = ExtResource( 12 )
+texture_scale = 15.0
+energy = 0.2
+shadow_enabled = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[connection signal="button_down" from="UI/Close Button" to="." method="_on_Close_Button_button_down"]
+[connection signal="button_up" from="UI/Close Button" to="." method="_on_Close_Button_button_up"]
+[connection signal="pressed" from="UI/Close Button" to="." method="_on_Close_Button_pressed"]
+[connection signal="text_entered" from="UI/Messages/LineEdit" to="." method="_on_LineEdit_text_entered"]
+[connection signal="toggled" from="UI/Messages/TextureButton" to="." method="_on_TextureButton_toggled"]
+[connection signal="pressed" from="UI/ResetButton" to="." method="_on_ResetButton_pressed"]
+[connection signal="pressed" from="UI/CopyMovesButton" to="." method="_on_CopyMovesButton_pressed"]

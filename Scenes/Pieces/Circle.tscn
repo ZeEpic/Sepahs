@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Images/Circle.svg" type="Texture" id=1]
+[ext_resource path="res://Scripts/Circle.gd" type="Script" id=2]
+[ext_resource path="res://Images/Lined Circle (1).svg" type="Texture" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 35.4581
+
+[sub_resource type="OccluderPolygon2D" id=2]
+polygon = PoolVector2Array( -0.994812, 35.5028, 8.54035, 34.5758, 17.4134, 30.8676, 24.962, 24.6433, 30.6566, 16.8298, 34.3648, 8.08919, 34.8945, -0.78381, 33.9675, -8.86222, 31.0539, -16.9406, 25.6242, -24.2244, 17.2809, -30.1839, 8.01062, -34.2893, -2.05428, -35.0839, -12.1192, -32.8326, -18.8733, -29.5217, -25.0976, -24.092, -30.6598, -16.6758, -33.3084, -9.39195, -34.7652, -1.97571, -34.5003, 5.04324, -32.9111, 12.327, -28.9382, 20.0082, -24.0381, 25.4379, -16.357, 30.8676, -8.41106, 34.046 )
+
+[node name="Circle" type="Area2D"]
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 1 )
+
+[node name="OppSprite" type="Sprite" parent="."]
+visible = false
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -0.471981, -4.19617e-05 )
+rotation = 0.785398
+shape = SubResource( 1 )
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource( 2 )
